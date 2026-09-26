@@ -20,23 +20,16 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-w4y-border/70 bg-white/90 backdrop-blur-md dark:border-w4y-dark-border dark:bg-w4y-dark-bg/90">
       <div className="mx-auto flex h-16 max-w-site items-center justify-between px-4 sm:px-6 lg:px-8">
-        {/* Brand / Logo Lockup */}
-        <Link href="/" className="flex items-center gap-3 group select-none py-1">
+        {/* Brand / Logo (Edge-to-edge height, no accompanying text) */}
+        <Link href="/" className="flex items-center h-16 select-none group" aria-label="W4Y Home">
           <Image
             src="/logo.png"
             alt="W4Y"
-            width={88}
-            height={27}
-            className="h-6 w-auto object-contain transition-opacity group-hover:opacity-85 dark:brightness-0 dark:invert"
+            width={208}
+            height={64}
+            className="h-16 w-auto max-h-full object-contain transition-opacity group-hover:opacity-85 dark:brightness-0 dark:invert py-0"
             priority
           />
-          <span
-            className="h-4 w-[1px] bg-w4y-border dark:bg-w4y-dark-border"
-            aria-hidden="true"
-          />
-          <span className="text-base font-bold tracking-tight text-w4y-dark dark:text-white group-hover:text-w4y-blue dark:group-hover:text-w4y-blue transition-colors">
-            MyDesk
-          </span>
         </Link>
 
         {/* Desktop Nav Links */}
