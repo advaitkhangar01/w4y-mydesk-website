@@ -18,7 +18,7 @@ export function Navbar() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-w4y-border/70 bg-white/90 backdrop-blur-md dark:border-w4y-dark-border dark:bg-w4y-dark-bg/90">
+    <header className="sticky top-0 z-50 w-full border-b border-w4y-border/70 bg-white/90 backdrop-blur-md dark:border-w4y-dark-border dark:bg-w4y-dark-bg/90 print:hidden">
       <div className="mx-auto flex h-16 max-w-site items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Brand / Logo (Edge-to-edge height, no accompanying text) */}
         <Link href="/" className="flex items-center h-16 select-none group" aria-label="W4Y Home">
