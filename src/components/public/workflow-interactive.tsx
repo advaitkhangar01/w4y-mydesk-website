@@ -1,8 +1,16 @@
 "use client";
 
 import React, { useState } from "react";
-import { Users, Briefcase, Calendar, FileText, Receipt, CreditCard, CheckCircle2 } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import {
+  ComicClientBadge,
+  ComicProjectBadge,
+  ComicMeetingBadge,
+  ComicQuoteBadge,
+  ComicInvoiceBadge,
+  ComicPaymentBadge,
+} from "@/components/comic/comic-workflow-badges";
 
 interface WorkflowStage {
   id: string;
@@ -22,7 +30,7 @@ const STAGES: WorkflowStage[] = [
   {
     id: "client",
     name: "Client",
-    icon: Users,
+    icon: ComicClientBadge,
     title: "Client Dossier",
     subtitle: "Connected client information",
     description:
@@ -41,7 +49,7 @@ const STAGES: WorkflowStage[] = [
   {
     id: "project",
     name: "Project",
-    icon: Briefcase,
+    icon: ComicProjectBadge,
     title: "Project Workspace",
     subtitle: "Understand where work stands",
     description:
@@ -60,7 +68,7 @@ const STAGES: WorkflowStage[] = [
   {
     id: "meeting",
     name: "Meeting",
-    icon: Calendar,
+    icon: ComicMeetingBadge,
     title: "Meeting Minutes (MoM)",
     subtitle: "Minutes connected to work",
     description:
@@ -79,7 +87,7 @@ const STAGES: WorkflowStage[] = [
   {
     id: "quote",
     name: "Quote",
-    icon: FileText,
+    icon: ComicQuoteBadge,
     title: "Quotation Maker",
     subtitle: "Accurate itemized proposals",
     description:
@@ -98,7 +106,7 @@ const STAGES: WorkflowStage[] = [
   {
     id: "invoice",
     name: "Invoice",
-    icon: Receipt,
+    icon: ComicInvoiceBadge,
     title: "Billing & Invoicing",
     subtitle: "Professional commercial invoices",
     description:
@@ -117,7 +125,7 @@ const STAGES: WorkflowStage[] = [
   {
     id: "payment",
     name: "Payment",
-    icon: CreditCard,
+    icon: ComicPaymentBadge,
     title: "Payment Records",
     subtitle: "Reconcile what is paid",
     description:

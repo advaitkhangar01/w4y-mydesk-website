@@ -2,6 +2,14 @@ import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
+  ComicClientBadge,
+  ComicProjectBadge,
+  ComicMeetingBadge,
+  ComicQuoteBadge,
+  ComicInvoiceBadge,
+  ComicPaymentBadge,
+} from "@/components/comic/comic-workflow-badges";
+import {
   Users,
   Briefcase,
   Calendar,
@@ -20,6 +28,7 @@ export const metadata = {
 const FEATURES = [
   {
     icon: Users,
+    badge: ComicClientBadge,
     title: "Clients",
     summary: "Keep client information connected to the work.",
     details: [
@@ -31,6 +40,7 @@ const FEATURES = [
   },
   {
     icon: Briefcase,
+    badge: ComicProjectBadge,
     title: "Projects",
     summary: "Understand where work stands.",
     details: [
@@ -42,6 +52,7 @@ const FEATURES = [
   },
   {
     icon: Calendar,
+    badge: ComicMeetingBadge,
     title: "Meetings & Minutes",
     summary: "Keep meeting information connected to business work.",
     details: [
@@ -53,6 +64,7 @@ const FEATURES = [
   },
   {
     icon: FileText,
+    badge: ComicQuoteBadge,
     title: "Quotes & Proposals",
     summary: "Create and manage itemized quotations.",
     details: [
@@ -64,6 +76,7 @@ const FEATURES = [
   },
   {
     icon: Receipt,
+    badge: ComicInvoiceBadge,
     title: "Invoices",
     summary: "Create and manage commercial invoices.",
     details: [
@@ -75,6 +88,7 @@ const FEATURES = [
   },
   {
     icon: CreditCard,
+    badge: ComicPaymentBadge,
     title: "Payments",
     summary: "Track payment reconciliation and balances.",
     details: [
@@ -88,8 +102,12 @@ const FEATURES = [
 
 export default function FeaturesPage() {
   return (
-    <div className="py-16 md:py-24">
-      <div className="mx-auto max-w-site px-4 sm:px-6 lg:px-8 space-y-16">
+    <div className="py-16 md:py-24 relative overflow-hidden bg-drafting-grid">
+      {/* Ambient Depth Orbs */}
+      <div className="pointer-events-none absolute -top-24 -right-24 w-[600px] h-[600px] depth-orb-blue blur-3xl opacity-60" />
+      <div className="pointer-events-none absolute bottom-1/4 -left-24 w-[500px] h-[500px] depth-orb-lavender blur-3xl opacity-50" />
+
+      <div className="relative mx-auto max-w-site px-4 sm:px-6 lg:px-8 space-y-16">
         <div className="max-w-3xl">
           <span className="text-xs font-bold uppercase tracking-wider text-w4y-blue">
             Core Modules
@@ -104,15 +122,18 @@ export default function FeaturesPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {FEATURES.map((feature, i) => {
-            const Icon = feature.icon;
+            const Badge = feature.badge;
             return (
               <div
                 key={i}
-                className="p-6 rounded-card border border-w4y-border bg-white dark:border-w4y-dark-border dark:bg-w4y-dark-surface space-y-4 flex flex-col justify-between"
+                className="comic-panel p-6 rounded-card bg-white dark:bg-w4y-dark-surface space-y-4 flex flex-col justify-between"
               >
-                <div className="space-y-3">
-                  <div className="w-10 h-10 rounded-lg bg-w4y-pastel-blue text-w4y-blue flex items-center justify-center">
-                    <Icon className="w-5 h-5" />
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <Badge className="w-12 h-12" />
+                    <span className="text-xs font-bold font-mono px-2 py-0.5 rounded bg-w4y-soft text-w4y-secondary dark:bg-w4y-dark-surface-elevated dark:text-w4y-dark-muted">
+                      0{i + 1}
+                    </span>
                   </div>
                   <h3 className="text-xl font-bold text-w4y-dark dark:text-white">
                     {feature.title}

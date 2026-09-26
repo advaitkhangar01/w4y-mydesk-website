@@ -10,8 +10,12 @@ export const metadata = {
 
 export default function PricingPage() {
   return (
-    <div className="py-16 md:py-24">
-      <div className="mx-auto max-w-site px-4 sm:px-6 lg:px-8 space-y-16">
+    <div className="py-16 md:py-24 relative overflow-hidden bg-drafting-grid">
+      {/* Ambient Depth Orbs */}
+      <div className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-[700px] h-[700px] depth-orb-blue blur-3xl opacity-60" />
+      <div className="pointer-events-none absolute bottom-10 right-10 w-[500px] h-[500px] depth-orb-lavender blur-3xl opacity-50" />
+
+      <div className="relative mx-auto max-w-site px-4 sm:px-6 lg:px-8 space-y-16">
         <div className="max-w-2xl mx-auto text-center space-y-4">
           <span className="text-xs font-bold uppercase tracking-wider text-w4y-blue">
             Simple Pricing
@@ -24,8 +28,11 @@ export default function PricingPage() {
           </p>
         </div>
 
-        <div className="max-w-lg mx-auto">
-          <div className="rounded-card border-2 border-w4y-blue bg-white p-8 shadow-xl dark:bg-w4y-dark-surface space-y-6">
+        <div className="max-w-lg mx-auto relative">
+          {/* Depth Orb Behind Card */}
+          <div className="pointer-events-none absolute -inset-8 depth-orb-blue blur-2xl opacity-70 rounded-full" />
+
+          <div className="comic-panel rounded-card bg-white p-8 dark:bg-w4y-dark-surface space-y-6 relative z-10">
             <div className="flex items-center justify-between">
               <div>
                 <span className="text-xs font-bold uppercase tracking-wider text-w4y-secondary dark:text-w4y-dark-muted">
@@ -83,7 +90,7 @@ export default function PricingPage() {
 
             <div className="pt-2">
               <Link href="/buy" className="block w-full">
-                <Button size="lg" className="w-full justify-center text-base">
+                <Button size="lg" className="w-full justify-center text-base shadow-md">
                   Purchase Commercial License
                 </Button>
               </Link>
@@ -93,7 +100,7 @@ export default function PricingPage() {
 
         {/* License clarifications */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto pt-8">
-          <div className="p-6 rounded-card border border-w4y-border bg-w4y-soft dark:border-w4y-dark-border dark:bg-w4y-dark-surface space-y-2 text-left">
+          <div className="comic-panel p-6 rounded-card bg-white dark:bg-w4y-dark-surface space-y-2 text-left">
             <Laptop className="w-6 h-6 text-w4y-blue" />
             <h4 className="font-bold text-w4y-dark dark:text-white">One Device Model</h4>
             <p className="text-xs text-w4y-secondary dark:text-w4y-dark-muted leading-relaxed">
@@ -101,7 +108,7 @@ export default function PricingPage() {
             </p>
           </div>
 
-          <div className="p-6 rounded-card border border-w4y-border bg-w4y-soft dark:border-w4y-dark-border dark:bg-w4y-dark-surface space-y-2 text-left">
+          <div className="comic-panel p-6 rounded-card bg-white dark:bg-w4y-dark-surface space-y-2 text-left">
             <ShieldCheck className="w-6 h-6 text-w4y-blue" />
             <h4 className="font-bold text-w4y-dark dark:text-white">Your Data Stays Local</h4>
             <p className="text-xs text-w4y-secondary dark:text-w4y-dark-muted leading-relaxed">

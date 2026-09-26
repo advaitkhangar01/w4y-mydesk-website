@@ -5,6 +5,18 @@ import { Button } from "@/components/ui/button";
 import { WorkflowInteractive } from "@/components/public/workflow-interactive";
 import { APP_CONFIG } from "@/lib/config";
 import {
+  ComicStickyNotesIllustration,
+  ComicInvoiceMathIllustration,
+  ComicUntrackedPaymentIllustration,
+} from "@/components/comic/comic-chaos-trio";
+import { ComicDeskVignette } from "@/components/comic/comic-desk-vignette";
+import {
+  ComicSoloFounderIcon,
+  ComicFreelancerIcon,
+  ComicDesignerIcon,
+  ComicAgencyLeadIcon,
+} from "@/components/comic/comic-personas";
+import {
   ArrowRight,
   CheckCircle2,
   Users,
@@ -28,10 +40,14 @@ export default function HomePage() {
       {/* ------------------------------------------------------------- */}
       {/* 1. HERO SECTION */}
       {/* ------------------------------------------------------------- */}
-      <section className="relative pt-16 pb-20 md:pt-24 md:pb-28 aurora-halo">
-        <div className="mx-auto max-w-site px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-w4y-border bg-w4y-soft text-xs font-semibold text-w4y-dark dark:border-w4y-dark-border dark:bg-w4y-dark-surface dark:text-w4y-dark-text mb-6">
-            <span className="w-2 h-2 rounded-full bg-w4y-blue" />
+      <section className="relative pt-16 pb-20 md:pt-24 md:pb-28 aurora-halo bg-drafting-grid">
+        {/* Ambient Depth Orbs */}
+        <div className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-[700px] h-[700px] depth-orb-blue blur-3xl opacity-70" />
+        <div className="pointer-events-none absolute top-1/3 -left-32 w-[500px] h-[500px] depth-orb-lavender blur-3xl opacity-50" />
+
+        <div className="relative mx-auto max-w-site px-4 sm:px-6 lg:px-8 text-center">
+          <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-w4y-border bg-white/90 backdrop-blur-xs text-xs font-semibold text-w4y-dark dark:border-w4y-dark-border dark:bg-w4y-dark-surface/90 dark:text-w4y-dark-text mb-6 shadow-xs">
+            <span className="w-2 h-2 rounded-full bg-w4y-blue animate-pulse" />
             <span>W4Y Software Release — ₹5,000 One-time Purchase</span>
           </div>
 
@@ -45,7 +61,7 @@ export default function HomePage() {
 
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link href="/buy" className="w-full sm:w-auto">
-              <Button size="lg" className="w-full sm:w-auto gap-2 text-base px-8">
+              <Button size="lg" className="w-full sm:w-auto gap-2 text-base px-8 shadow-md">
                 Get MyDesk — ₹5,000
                 <ArrowRight className="w-4 h-4" />
               </Button>
@@ -149,38 +165,47 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-6 rounded-card bg-white border border-w4y-border shadow-xs dark:bg-w4y-dark-surface-elevated dark:border-w4y-dark-border space-y-3">
-              <div className="w-10 h-10 rounded-lg bg-[#EA4335]/10 text-w4y-error flex items-center justify-center font-bold">
-                ✕
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="comic-panel rounded-card bg-white p-6 dark:bg-w4y-dark-surface-elevated space-y-4">
+              <ComicStickyNotesIllustration className="w-full h-36 rounded-lg bg-w4y-soft/50 dark:bg-w4y-dark-surface/40 p-2" />
+              <div className="space-y-1">
+                <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[11px] font-bold uppercase tracking-wider bg-[#EA4335]/10 text-w4y-error">
+                  <span>Pain Point 01</span>
+                </div>
+                <h3 className="text-base font-bold text-w4y-dark dark:text-white">
+                  Scattered Client Notes & WhatsApp
+                </h3>
               </div>
-              <h3 className="text-base font-bold text-w4y-dark dark:text-white">
-                Scattered Client Notes & WhatsApp
-              </h3>
               <p className="text-sm text-w4y-secondary dark:text-w4y-dark-muted leading-relaxed">
                 Contact details in phone, notes in random text files, and project agreements buried inside old message threads.
               </p>
             </div>
 
-            <div className="p-6 rounded-card bg-white border border-w4y-border shadow-xs dark:bg-w4y-dark-surface-elevated dark:border-w4y-dark-border space-y-3">
-              <div className="w-10 h-10 rounded-lg bg-[#EA4335]/10 text-w4y-error flex items-center justify-center font-bold">
-                ✕
+            <div className="comic-panel rounded-card bg-white p-6 dark:bg-w4y-dark-surface-elevated space-y-4">
+              <ComicInvoiceMathIllustration className="w-full h-36 rounded-lg bg-w4y-soft/50 dark:bg-w4y-dark-surface/40 p-2" />
+              <div className="space-y-1">
+                <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[11px] font-bold uppercase tracking-wider bg-[#EA4335]/10 text-w4y-error">
+                  <span>Pain Point 02</span>
+                </div>
+                <h3 className="text-base font-bold text-w4y-dark dark:text-white">
+                  Disconnected Quotes & Invoices
+                </h3>
               </div>
-              <h3 className="text-base font-bold text-w4y-dark dark:text-white">
-                Disconnected Quotes & Invoices
-              </h3>
               <p className="text-sm text-w4y-secondary dark:text-w4y-dark-muted leading-relaxed">
                 Manually copying line items from a quotation document into an invoice spreadsheet, hoping amounts and numbers match.
               </p>
             </div>
 
-            <div className="p-6 rounded-card bg-white border border-w4y-border shadow-xs dark:bg-w4y-dark-surface-elevated dark:border-w4y-dark-border space-y-3">
-              <div className="w-10 h-10 rounded-lg bg-[#EA4335]/10 text-w4y-error flex items-center justify-center font-bold">
-                ✕
+            <div className="comic-panel rounded-card bg-white p-6 dark:bg-w4y-dark-surface-elevated space-y-4">
+              <ComicUntrackedPaymentIllustration className="w-full h-36 rounded-lg bg-w4y-soft/50 dark:bg-w4y-dark-surface/40 p-2" />
+              <div className="space-y-1">
+                <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[11px] font-bold uppercase tracking-wider bg-[#EA4335]/10 text-w4y-error">
+                  <span>Pain Point 03</span>
+                </div>
+                <h3 className="text-base font-bold text-w4y-dark dark:text-white">
+                  Missing Payment Reconciliation
+                </h3>
               </div>
-              <h3 className="text-base font-bold text-w4y-dark dark:text-white">
-                Missing Payment Reconciliation
-              </h3>
               <p className="text-sm text-w4y-secondary dark:text-w4y-dark-muted leading-relaxed">
                 Never knowing for certain who paid what, what is partially cleared, or which project is awaiting balance clearance.
               </p>
@@ -378,29 +403,33 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 text-left">
-            <div className="p-6 rounded-card bg-white border border-w4y-border dark:bg-w4y-dark-surface-elevated dark:border-w4y-dark-border space-y-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
+            <div className="comic-panel rounded-card bg-white p-6 dark:bg-w4y-dark-surface-elevated space-y-3">
+              <ComicSoloFounderIcon className="w-14 h-14" />
               <h3 className="font-bold text-w4y-dark dark:text-white">Solo Business Owners</h3>
               <p className="text-xs text-w4y-secondary dark:text-w4y-dark-muted leading-relaxed">
                 Run your entire commercial operations without hiring an administrative assistant or buying four SaaS subscriptions.
               </p>
             </div>
 
-            <div className="p-6 rounded-card bg-white border border-w4y-border dark:bg-w4y-dark-surface-elevated dark:border-w4y-dark-border space-y-2">
+            <div className="comic-panel rounded-card bg-white p-6 dark:bg-w4y-dark-surface-elevated space-y-3">
+              <ComicFreelancerIcon className="w-14 h-14" />
               <h3 className="font-bold text-w4y-dark dark:text-white">Freelancers & Consultants</h3>
               <p className="text-xs text-w4y-secondary dark:text-w4y-dark-muted leading-relaxed">
                 Present structured, professional proposals, track milestone sign-offs, and never miss an overdue invoice again.
               </p>
             </div>
 
-            <div className="p-6 rounded-card bg-white border border-w4y-border dark:bg-w4y-dark-surface-elevated dark:border-w4y-dark-border space-y-2">
+            <div className="comic-panel rounded-card bg-white p-6 dark:bg-w4y-dark-surface-elevated space-y-3">
+              <ComicDesignerIcon className="w-14 h-14" />
               <h3 className="font-bold text-w4y-dark dark:text-white">Architects & Designers</h3>
               <p className="text-xs text-w4y-secondary dark:text-w4y-dark-muted leading-relaxed">
                 Keep client design changes, meeting minutes, and milestone payments organized directly on your workspace.
               </p>
             </div>
 
-            <div className="p-6 rounded-card bg-white border border-w4y-border dark:bg-w4y-dark-surface-elevated dark:border-w4y-dark-border space-y-2">
+            <div className="comic-panel rounded-card bg-white p-6 dark:bg-w4y-dark-surface-elevated space-y-3">
+              <ComicAgencyLeadIcon className="w-14 h-14" />
               <h3 className="font-bold text-w4y-dark dark:text-white">Service Agencies</h3>
               <p className="text-xs text-w4y-secondary dark:text-w4y-dark-muted leading-relaxed">
                 Maintain clean client dossiers, itemized project quotes, and reconciled billing records across your client roster.
@@ -413,7 +442,7 @@ export default function HomePage() {
       {/* ------------------------------------------------------------- */}
       {/* 8 & 9. PRICING SECTION */}
       {/* ------------------------------------------------------------- */}
-      <section className="py-20 border-t border-w4y-border bg-white dark:border-w4y-dark-border dark:bg-w4y-dark-bg">
+      <section className="py-20 border-t border-w4y-border bg-white dark:border-w4y-dark-border dark:bg-w4y-dark-bg relative overflow-hidden">
         <div className="mx-auto max-w-site px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl mx-auto text-center mb-16">
             <span className="text-xs font-bold uppercase tracking-wider text-w4y-blue">
@@ -427,8 +456,11 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="max-w-md mx-auto">
-            <div className="rounded-card border-2 border-w4y-blue bg-white p-8 shadow-lg dark:bg-w4y-dark-surface dark:border-w4y-blue text-left relative">
+          <div className="max-w-md mx-auto relative">
+            {/* Depth Orb Background */}
+            <div className="pointer-events-none absolute -inset-10 depth-orb-blue blur-3xl opacity-60 rounded-full" />
+
+            <div className="comic-panel rounded-card bg-white p-8 dark:bg-w4y-dark-surface text-left relative z-10">
               <div className="absolute -top-3.5 right-6 px-3 py-1 rounded-full bg-w4y-blue text-white text-xs font-bold uppercase tracking-wider">
                 Full Commercial License
               </div>
