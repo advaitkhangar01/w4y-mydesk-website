@@ -1,0 +1,250 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// -------------------------------------------------------------
+// DOMAIN ENUMS (Finite, typed representations)
+// -------------------------------------------------------------
+
+enum CustomerStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  FAILED
+  CANCELLED
+  REFUNDED
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+  CANCELLED
+}
+
+enum LicenseStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+  REVOKED
+  EXPIRED
+}
+
+enum AccessStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+}
+
+enum ProductHealthState {
+  HEALTHY
+  DEGRADED
+  OFFLINE
+  UNKNOWN
+}
+
+enum AuditAction {
+  ADMIN_LOGIN
+  CUSTOMER_UPDATED
+  ACCESS_ACTIVATED
+  ACCESS_DEACTIVATED
+  CUSTOMER_SUSPENDED
+  REFUND_RECORDED
+  ACCESS_EMAIL_RESENT
+}
+
+// -------------------------------------------------------------
+// CORE COMMERCIAL ENTITIES
+// -------------------------------------------------------------
+
+model Customer {
+  id           String         @id @default(cuid())
+  name         String
+  email        String         @unique
+  phone        String?
+  businessName String?
+  status       CustomerStatus @default(ACTIVE)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+
+  orders         Order[]
+  productAccesses ProductAccess[]
+
+  @@index([email])
+  @@index([status])
+}
+
+model Order {
+  id           String      @id @default(cuid())
+  orderNumber  String      @unique
+  customerId   String
+  customer     Customer    @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  amount       Decimal     @db.Decimal(12, 2)
+  currency     String      @default("INR")
+  status       OrderStatus @default(PENDING)
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  payment         Payment?
+  productAccess   ProductAccess?
+  proformaInvoice ProformaInvoice?
+
+  @@index([customerId])
+  @@index([orderNumber])
+  @@index([status])
+}
+
+model Payment {
+  id                 String        @id @default(cuid())
+  orderId            String        @unique
+  order              Order         @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  customerId         String
+  amount             Decimal       @db.Decimal(12, 2)
+  currency           String        @default("INR")
+  status             PaymentStatus @default(PENDING)
+  provider           String        @default("DIRECT") // MOCK, RAZORPAY, CASHFREE
+  providerOrderId    String?
+  providerPaymentId  String?
+  providerSignature  String?
+  refundReason       String?       @db.Text
+  refundedAt         DateTime?
+  paidAt             DateTime?
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime      @updatedAt
+
+  @@index([orderId])
+  @@index([status])
+  @@index([providerPaymentId])
+}
+
+model ProductAccess {
+  id          String        @id @default(cuid())
+  customerId  String
+  customer    Customer      @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  orderId     String        @unique
+  order       Order         @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productName String        @default("MyDesk")
+  status      AccessStatus  @default(ACTIVE)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  license       License?
+  productHealth ProductHealth?
+
+  @@index([customerId])
+  @@index([status])
+}
+
+model License {
+  id              String        @id @default(cuid())
+  accessId        String        @unique
+  productAccess   ProductAccess @relation(fields: [accessId], references: [id], onDelete: Cascade)
+  licenseKey      String        @unique
+  status          LicenseStatus @default(ACTIVE)
+  deviceId        String?       // Populated when activated in MyDesk application
+  deviceName      String?
+  activatedAt     DateTime?
+  lastValidatedAt DateTime?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@index([licenseKey])
+  @@index([status])
+  @@index([deviceId])
+}
+
+model ProductHealth {
+  id            String             @id @default(cuid())
+  accessId      String             @unique
+  productAccess ProductAccess      @relation(fields: [accessId], references: [id], onDelete: Cascade)
+  state         ProductHealthState @default(UNKNOWN)
+  lastHeartbeat DateTime?
+  lastChecked   DateTime?
+  clientVersion String?
+  osInfo        String?
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
+
+  @@index([state])
+}
+
+model ProformaInvoice {
+  id              String   @id @default(cuid())
+  invoiceNumber   String   @unique
+  orderId         String   @unique
+  order           Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  customerName    String
+  customerEmail   String
+  customerPhone   String?
+  customerBusiness String?
+  amount          Decimal  @db.Decimal(12, 2)
+  currency        String   @default("INR")
+  taxRate         Decimal  @default(0) @db.Decimal(5, 2)
+  taxAmount       Decimal  @default(0) @db.Decimal(12, 2)
+  totalAmount     Decimal  @db.Decimal(12, 2)
+  sellerName      String   @default("W4Y")
+  sellerAddress   String   @default("Plot no. 7, New Sneh Nagar, Wardha Road, Nagpur, Maharashtra - 440015")
+  sellerEmail     String   @default("ceo@w4y.online")
+  sellerPhone     String   @default("+91 7798647265")
+  sellerWebsite   String   @default("w4y.online")
+  notes           String?  @db.Text
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([invoiceNumber])
+}
+
+// -------------------------------------------------------------
+// COMMERCIAL ADMIN & AUDITING
+// -------------------------------------------------------------
+
+model Admin {
+  id           String         @id @default(cuid())
+  username     String         @unique
+  passwordHash String
+  role         String         @default("ADMIN")
+  lastLoginAt  DateTime?
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+
+  sessions     AdminSession[]
+
+  @@index([username])
+}
+
+model AdminSession {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  adminId   String
+  admin     Admin    @relation(fields: [adminId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([token])
+  @@index([adminId])
+}
+
+model AuditLog {
+  id         String      @id @default(cuid())
+  action     AuditAction
+  entityType String?
+  entityId   String?
+  details    String?     @db.Text
+  ipAddress  String?
+  adminId    String?
+  createdAt  DateTime    @default(now())
+
+  @@index([action])
+  @@index([createdAt])
+}
