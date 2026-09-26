@@ -50,15 +50,17 @@ export default async function ProformaInvoicePage({
         <div className="flex justify-between items-start border-b border-gray-200 pb-8">
           <div className="space-y-3">
             <div className="flex items-center gap-3">
-              <div className="h-10 w-10 relative bg-white p-0.5 border border-gray-200 rounded-md">
-                <Image
-                  src="/logo.png"
-                  alt="W4Y Logo"
-                  width={40}
-                  height={40}
-                  className="object-contain"
-                />
-              </div>
+              <Image
+                src="/logo.png"
+                alt="W4Y"
+                width={100}
+                height={31}
+                className="h-8 w-auto object-contain"
+              />
+              <span
+                className="h-5 w-[1px] bg-gray-300"
+                aria-hidden="true"
+              />
               <div>
                 <h1 className="text-xl font-bold tracking-tight text-gray-900">
                   {invoice.sellerName}

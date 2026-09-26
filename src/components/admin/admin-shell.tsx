@@ -52,29 +52,26 @@ export function AdminShell({ adminUsername, children }: AdminShellProps) {
       {/* Sidebar */}
       <aside className="w-full md:w-64 border-r border-w4y-border bg-white dark:border-w4y-dark-border dark:bg-w4y-dark-surface flex flex-col shrink-0">
         {/* Brand header */}
-        <div className="h-16 flex items-center gap-3 px-6 border-b border-w4y-border dark:border-w4y-dark-border">
-          <div className="h-8 w-8 relative bg-white p-0.5 border border-w4y-border rounded-md">
+        <div className="h-16 flex items-center justify-between px-6 border-b border-w4y-border dark:border-w4y-dark-border">
+          <div className="flex items-center gap-2.5">
             <Image
               src="/logo.png"
-              alt="W4Y Logo"
-              width={32}
-              height={32}
-              className="object-contain"
+              alt="W4Y"
+              width={80}
+              height={25}
+              className="h-5 w-auto object-contain dark:brightness-0 dark:invert"
             />
-          </div>
-          <div>
-            <div className="flex items-center gap-1.5">
-              <span className="text-xs font-bold text-w4y-secondary dark:text-w4y-dark-muted">
-                W4Y
-              </span>
-              <span className="text-xs font-bold text-w4y-dark dark:text-white">
-                Admin
-              </span>
-            </div>
-            <span className="text-[10px] text-w4y-blue font-semibold uppercase tracking-wider">
-              Commercial Desk
+            <span
+              className="h-3.5 w-[1px] bg-w4y-border dark:bg-w4y-dark-border"
+              aria-hidden="true"
+            />
+            <span className="text-xs font-bold text-w4y-dark dark:text-white">
+              Admin
             </span>
           </div>
+          <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-w4y-pastel-blue text-w4y-blue uppercase tracking-wider">
+            Commercial
+          </span>
         </div>
 
         {/* Navigation */}

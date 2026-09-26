@@ -12,23 +12,20 @@ export function Footer() {
           {/* Brand & Proposition */}
           <div className="md:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="relative h-10 w-10 overflow-hidden rounded-lg bg-white p-0.5 border border-w4y-border dark:border-w4y-dark-border shadow-xs">
-                <Image
-                  src="/logo.png"
-                  alt="W4Y Logo"
-                  width={40}
-                  height={40}
-                  className="object-contain"
-                />
-              </div>
-              <div>
-                <span className="text-xs font-bold uppercase tracking-widest text-w4y-secondary dark:text-w4y-dark-muted">
-                  {APP_CONFIG.brand.name}
-                </span>
-                <h3 className="text-lg font-bold text-w4y-dark dark:text-white">
-                  {APP_CONFIG.brand.product}
-                </h3>
-              </div>
+              <Image
+                src="/logo.png"
+                alt="W4Y"
+                width={96}
+                height={30}
+                className="h-7 w-auto object-contain dark:brightness-0 dark:invert"
+              />
+              <span
+                className="h-4 w-[1px] bg-w4y-border dark:bg-w4y-dark-border"
+                aria-hidden="true"
+              />
+              <h3 className="text-lg font-bold text-w4y-dark dark:text-white">
+                MyDesk
+              </h3>
             </div>
 
             <p className="text-sm font-medium text-w4y-dark dark:text-w4y-dark-text max-w-md">

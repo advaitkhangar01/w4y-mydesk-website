@@ -83,13 +83,14 @@ export function AdminAuthForm({ isBootstrapped }: { isBootstrapped: boolean }) {
   return (
     <Card className="p-8 border border-w4y-border bg-white dark:bg-w4y-dark-surface dark:border-w4y-dark-border shadow-lg">
       <div className="text-center space-y-3 mb-6">
-        <div className="relative h-12 w-12 mx-auto bg-white p-1 rounded-xl border border-w4y-border shadow-xs">
+        <div className="flex justify-center pb-1">
           <Image
             src="/logo.png"
-            alt="W4Y Logo"
-            width={48}
-            height={48}
-            className="object-contain"
+            alt="W4Y"
+            width={120}
+            height={37}
+            className="h-8 w-auto object-contain dark:brightness-0 dark:invert"
+            priority
           />
         </div>
         <div>

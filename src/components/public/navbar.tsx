@@ -20,31 +20,23 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-w4y-border/70 bg-white/90 backdrop-blur-md dark:border-w4y-dark-border dark:bg-w4y-dark-bg/90">
       <div className="mx-auto flex h-16 max-w-site items-center justify-between px-4 sm:px-6 lg:px-8">
-        {/* Brand / Logo */}
-        <Link href="/" className="flex items-center gap-3 group">
-          <div className="relative h-9 w-9 overflow-hidden rounded-lg bg-white p-0.5 border border-w4y-border dark:border-w4y-dark-border shadow-xs">
-            <Image
-              src="/logo.png"
-              alt="W4Y Logo"
-              width={36}
-              height={36}
-              className="object-contain"
-              priority
-            />
-          </div>
-          <div className="flex flex-col">
-            <div className="flex items-center gap-1.5">
-              <span className="text-xs font-bold tracking-widest text-w4y-secondary dark:text-w4y-dark-muted">
-                W4Y
-              </span>
-              <span className="text-sm font-semibold text-w4y-dark dark:text-white">
-                MyDesk
-              </span>
-            </div>
-            <span className="text-[10px] text-w4y-secondary dark:text-w4y-dark-muted">
-              One-time purchase
-            </span>
-          </div>
+        {/* Brand / Logo Lockup */}
+        <Link href="/" className="flex items-center gap-3 group select-none py-1">
+          <Image
+            src="/logo.png"
+            alt="W4Y"
+            width={88}
+            height={27}
+            className="h-6 w-auto object-contain transition-opacity group-hover:opacity-85 dark:brightness-0 dark:invert"
+            priority
+          />
+          <span
+            className="h-4 w-[1px] bg-w4y-border dark:bg-w4y-dark-border"
+            aria-hidden="true"
+          />
+          <span className="text-base font-bold tracking-tight text-w4y-dark dark:text-white group-hover:text-w4y-blue dark:group-hover:text-w4y-blue transition-colors">
+            MyDesk
+          </span>
         </Link>
 
         {/* Desktop Nav Links */}
